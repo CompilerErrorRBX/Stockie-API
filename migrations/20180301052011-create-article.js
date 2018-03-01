@@ -10,6 +10,9 @@ module.exports = {
       author: {
         type: Sequelize.STRING(128),
       },
+      author_image: {
+        type: Sequelize.STRING(128),
+      },
       body: {
         type: Sequelize.TEXT,
       },

@@ -6,6 +6,7 @@ Xray('https://www.marketwatch.com/search?q=&m=Keyword&rpp=500&mp=807&bd=false&rs
     article: Xray('a@href', {
       body: '#article-body@html',
       author: 'meta[name="author"]@content',
+      author_image: '.author-image@src',
       publisher: 'meta[name="article:publisher"]@content',
       section: 'meta[name="parsely-section"]@content',
       tags: 'meta[name="parsely-tags"]@content',
