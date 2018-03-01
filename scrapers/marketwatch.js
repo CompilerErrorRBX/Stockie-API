@@ -12,7 +12,8 @@ Xray('https://www.marketwatch.com/search?q=&m=Keyword&rpp=500&mp=807&bd=false&rs
       date_published: 'meta[name="parsely-pub-date"]@content',
       source: 'meta[property="og:url"]@content',
       thumbnail: '.hero-figure img@src',
-      title: '#article-headline',
+      title: 'meta[property="og:title"]@content',
+      description: 'meta[name="description"]@content',
     }),
   }]),
 })(function (err, pages) {

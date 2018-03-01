@@ -8,12 +8,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     author: DataTypes.STRING,
     body: DataTypes.TEXT,
+    description: DataTypes.STRING,
     date_published: DataTypes.DATE(6),
     publisher: DataTypes.STRING,
     section: DataTypes.STRING,
     source: DataTypes.STRING,
     thumbnail: DataTypes.STRING,
-    title: DataTypes.STRING
+    title: {
+      type: DataTypes.STRING,
+      unique: true,
+    }
   }, {
     timestamps: false,
     hooks: {

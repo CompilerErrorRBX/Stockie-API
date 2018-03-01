@@ -5,10 +5,10 @@
 ## Build Setup
 
 ``` bash
-# install dependencies
+# Install dependencies
 npm install
 
-# initialize database
+# Initialize database
 node_modules/.bin/sequelize db:create
 node_modules/.bin/sequelize db:migrate
 
