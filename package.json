@@ -13,7 +13,7 @@
     "mysql": "^2.15.0",
     "mysql2": "^1.5.2",
     "request": "^2.83.0",
-    "sequelize": "^4.35.0",
+    "sequelize": "^4.35.1",
     "sequelize-cli": "^4.0.0",
     "uuid": "^3.2.1",
     "x-ray": "^2.3.2"
@@ -21,7 +21,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "scrape": "NODE_PATH=$NODE_PATH: node ./scrapers"
+    "extract": "NODE_PATH=$NODE_PATH: node ./scrapers"
   },
   "keywords": [],
   "author": "",

@@ -18,9 +18,8 @@ Xray('https://www.marketwatch.com/search?q=&m=Keyword&rpp=500&mp=807&bd=false&rs
     }),
   }]),
 })(function (err, pages) {
-  console.log('Processing results...');
+  console.log('Processing results from MarketWatch...');
   pages.forEach((articles) => {
-    console.log(articles.links.length);
     articles.links.forEach((articlePage) => {
       db.Article.create(articlePage.article)
         .then(() => {
@@ -32,7 +31,7 @@ Xray('https://www.marketwatch.com/search?q=&m=Keyword&rpp=500&mp=807&bd=false&rs
         });
     });
   });
-  console.log('Done!');
+  console.log('Finished processing results from MarketWatch.');
 })
   .limit(5)
   .paginate('.nextprevlinks a:last-of-type@href');

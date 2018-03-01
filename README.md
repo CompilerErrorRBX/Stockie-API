@@ -4,16 +4,23 @@
 
 ## Build Setup
 
+Make sure that MySQL server is installed.
+
 ``` bash
 # Install dependencies
 npm install
+
+# Start the MySQL server
+mysql.server start
+# or
+mysql.server restart
 
 # Initialize database
 node_modules/.bin/sequelize db:create
 node_modules/.bin/sequelize db:migrate
 
 # Pull latest articles from sources
-npm run scrape
+npm run extract
 
 # Start the API service
 npm start
