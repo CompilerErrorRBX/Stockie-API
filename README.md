@@ -8,5 +8,15 @@
 # install dependencies
 npm install
 
+# initialize database
+node_modules/.bin/sequelize db:create
+node_modules/.bin/sequelize db:migrate
+
+# Pull latest articles from sources
+npm run scrape
+
+# Start the API service
 npm start
+
+# Proceed to Stockie-Frontend
 ```
