@@ -1,9 +1,9 @@
 const db = require('../models');
 const Xray = require('x-ray')();
 
-Xray('https://www.marketwatch.com/search?q=&m=Keyword&rpp=500&mp=807&bd=false&rs=true', {
-  links: Xray('.resultlist .searchresult', [{
-    article: Xray('a@href', {
+Xray.timeout(50000)('https://www.marketwatch.com/search?q=&m=Keyword&rpp=500&mp=807&bd=false&rs=true', {
+  links: Xray.timeout(50000)('.resultlist .searchresult', [{
+    article: Xray.timeout(50000)('a@href', {
       body: '#article-body@html',
       author: 'meta[name="author"]@content',
       author_image: '.author-image@src',
@@ -17,7 +17,7 @@ Xray('https://www.marketwatch.com/search?q=&m=Keyword&rpp=500&mp=807&bd=false&rs
       description: 'meta[name="description"]@content',
     }),
   }]),
-})(function (err, pages) {
+})((err, pages) => {
   console.log('Processing results from MarketWatch...');
   pages.forEach((articles) => {
     articles.links.forEach((articlePage) => {
@@ -32,6 +32,7 @@ Xray('https://www.marketwatch.com/search?q=&m=Keyword&rpp=500&mp=807&bd=false&rs
     });
   });
   console.log('Finished processing results from MarketWatch.');
+  console.log('Done!');
 })
   .limit(5)
   .paginate('.nextprevlinks a:last-of-type@href');
