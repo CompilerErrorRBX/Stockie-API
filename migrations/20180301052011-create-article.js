@@ -15,6 +15,7 @@ module.exports = {
       },
       body: {
         type: Sequelize.TEXT,
+        allowNull: false,
       },
       date_published: {
         type: Sequelize.DATE(6),

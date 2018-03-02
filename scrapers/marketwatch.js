@@ -1,11 +1,13 @@
 const db = require('../models');
 const Xray = require('x-ray')();
 
-Xray.timeout(50000)('https://www.marketwatch.com/search?q=&m=Keyword&rpp=500&mp=807&bd=false&rs=true', {
-  links: Xray.timeout(50000)('.resultlist .searchresult', [{
-    article: Xray.timeout(50000)('a@href', {
+const articleBatch = [];
+
+Xray.timeout(500000)('https://www.marketwatch.com/search?q=&m=Keyword&rpp=500&mp=806&bd=false&rs=true', {
+  links: Xray('.resultlist .searchresult', [{
+    article: Xray('a@href', {
       body: '#article-body@html',
-      author: 'meta[name="author"]@content',
+      author: 'meta[name="parsely-author"]@content',
       author_image: '.author-image@src',
       publisher: 'meta[name="article:publisher"]@content',
       section: 'meta[name="parsely-section"]@content',
@@ -18,9 +20,15 @@ Xray.timeout(50000)('https://www.marketwatch.com/search?q=&m=Keyword&rpp=500&mp=
     }),
   }]),
 })((err, pages) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
   console.log('Processing results from MarketWatch...');
   pages.forEach((articles) => {
     articles.links.forEach((articlePage) => {
+      // articleBatch.push(db.Article.build(articlePage.article));
+
       db.Article.create(articlePage.article)
         .then(() => {
           // console.log('Created new Article');
@@ -31,8 +39,11 @@ Xray.timeout(50000)('https://www.marketwatch.com/search?q=&m=Keyword&rpp=500&mp=
         });
     });
   });
+
+  // db.Article.bulkCreate(articleBatch);
+
   console.log('Finished processing results from MarketWatch.');
   console.log('Done!');
 })
-  .limit(5)
+  .limit(6)
   .paginate('.nextprevlinks a:last-of-type@href');
