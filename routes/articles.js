@@ -38,14 +38,22 @@ const articleAPI = (app) => {
     //   res.status(500).send(err);
     // });
 
+    const limit = req.query.limit ? parseInt(req.query.limit) : 10;
+    const offset = req.query.offset ? parseInt(req.query.offset) : 0;
+
     db.sequelize.query(
-      `SELECT id, author, author_image, date_published, description, publisher, section, thumbnail, title, source
+      `SELECT id, author, author_image, date_published, description, publisher, section, thumbnail, title, source, 
+        MATCH (title, body, description) AGAINST ('${req.query.query}' IN NATURAL LANGUAGE MODE) AS score
       FROM Articles 
       WHERE MATCH (title, body, description) AGAINST ('${req.query.query}' IN NATURAL LANGUAGE MODE)
-      LIMIT 10`
-      , { model: db.Articles }).then(articles => {
+      ORDER BY score DESC, date_published
+      LIMIT ${limit} OFFSET ${offset}`
+      , { type: db.Sequelize.QueryTypes.SELECT }).then(articles => {
         res.status(200).send(articles);
-    });
+      }).catch((err) => {
+        // TODO: Remove later as we do not want to expose SQL errors to the front-end.
+        res.status(500).send(err);
+      });;
   });
 
   // Gets a list of articles similar to a specific article
