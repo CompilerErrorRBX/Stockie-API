@@ -1,3 +1,3 @@
 console.log('Beginning data extraction...');
 
-require('./marketwatch');
+require('./marketwatch')(5, 500);

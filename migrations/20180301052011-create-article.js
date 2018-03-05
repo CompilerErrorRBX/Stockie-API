@@ -40,6 +40,12 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+    }).then(() => {
+      queryInterface.addIndex('Articles', {
+        type: 'FULLTEXT',
+        name: 'search',
+        fields: ['body', 'description', 'title'],
+      });
     });
   },
   down: (queryInterface, Sequelize) => {
