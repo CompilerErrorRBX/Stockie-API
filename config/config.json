@@ -1,23 +1,19 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
     "database": "Stockie_Dev",
-    "host": "127.0.0.1",
+    "host": "192.168.29.218",
     "dialect": "mysql",
     "logging": false
   },
   "test": {
-    "username": "root",
-    "password": null,
+    "username": "foo",
+    "password": "bar",
     "database": "Stockie_Test",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "logging": false
   },
   "production": {
-    "username": "root",
-    "password": null,
     "database": "Stockie_Prod",
     "host": "127.0.0.1",
     "dialect": "mysql",

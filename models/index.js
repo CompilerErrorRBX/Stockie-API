@@ -9,6 +9,9 @@ const env       = process.env.NODE_ENV || 'development';
 const config    = require(__dirname + '/../config/config.json')[env];
 const db        = {};
 
+config.username = process.env[`STOCKIE_${env.toLocaleUpperCase()}_USERNAME`];
+config.password = process.env[`STOCKIE_${env.toLocaleUpperCase()}_PASSWORD`];
+
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
