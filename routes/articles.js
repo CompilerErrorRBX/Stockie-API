@@ -10,7 +10,7 @@ const articleAPI = (app) => {
   // If `offset` is given as a query param it will return `offset` number of results. Default 0.
   app.get('/articles', (req, res, next) => {
     db.Article.findAll({
-      attributes: { exclude: ['body'] },
+      attributes: { exclude: ['body', 'processed_body'] },
       limit: req.query.limit ? parseInt(req.query.limit) : 10,
       offset: req.query.offset ? parseInt(req.query.offset) : 0,
       order: [['date_published', 'DESC']],
