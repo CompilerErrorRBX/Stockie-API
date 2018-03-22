@@ -1,7 +1,9 @@
 {
   "development": {
+    "username": "root",
+    "password": null,
     "database": "Stockie_Dev",
-    "host": "192.168.29.218",
+    "host": "127.0.0.1",
     "dialect": "mysql",
     "logging": false
   },
