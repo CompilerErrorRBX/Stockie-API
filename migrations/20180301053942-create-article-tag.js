@@ -2,16 +2,30 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Article_Tags', {
-      id: {
-        allowNull: false,
-        primaryKey: true,
-        type: Sequelize.STRING(36)
+      ArticleId: {
+        type: Sequelize.UUID,
+        foreignKey: true,
+        references: {
+          model: 'Articles',
+          key: 'id'
+        },
+        onUpdate: 'NO ACTION',
+        onDelete: 'CASCADE',
+        allowNull: false
       },
-      article_id: {
-        type: Sequelize.STRING(36)
+      TagId: {
+        type: Sequelize.UUID,
+        foreignKey: true,
+        references: {
+          model: 'Tags',
+          key: 'id'
+        },
+        onUpdate: 'NO ACTION',
+        onDelete: 'CASCADE',
+        allowNull: false
       },
-      tag_id: {
-        type: Sequelize.STRING(36)
+      weight: {
+        type: Sequelize.DOUBLE
       },
     });
   },

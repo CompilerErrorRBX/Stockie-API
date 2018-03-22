@@ -15,8 +15,8 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
-db['Article'] = require('./Article')(sequelize, Sequelize);
 db['Article_Tag'] = require('./Article_Tag')(sequelize, Sequelize);
+db['Article'] = require('./Article')(sequelize, Sequelize);
 db['Tag'] = require('./Tag')(sequelize, Sequelize);
 
 Object.keys(db).forEach(modelName => {

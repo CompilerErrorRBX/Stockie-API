@@ -5,10 +5,10 @@ module.exports = {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.STRING(36)
+        type: Sequelize.UUID
       },
       tag: {
-        type: Sequelize.STRING(32)
+        type: Sequelize.STRING(128)
       },
     });
   },

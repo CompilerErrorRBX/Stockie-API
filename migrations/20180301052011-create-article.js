@@ -5,7 +5,7 @@ module.exports = {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.STRING(36),
+        type: Sequelize.UUID,
       },
       author: {
         type: Sequelize.STRING(128),
@@ -25,6 +25,10 @@ module.exports = {
       },
       publisher: {
         type: Sequelize.STRING(256),
+      },
+      processed_body: {
+        type: Sequelize.TEXT,
+        allowNull: false,
       },
       section: {
         type: Sequelize.STRING(64),

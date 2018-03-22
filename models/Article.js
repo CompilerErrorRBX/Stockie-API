@@ -1,17 +1,18 @@
 const UUID = require('uuid/v4');
 
 module.exports = (sequelize, DataTypes) => {
-  const Article = sequelize.define('Article', {
+  const Article = sequelize.define('Articles', {
     id: {
-      type: DataTypes.STRING,
+      type: DataTypes.UUID,
       primaryKey: true,
     },
     author: DataTypes.STRING,
     author_image: DataTypes.STRING,
     body: DataTypes.TEXT,
     description: DataTypes.STRING,
-    date_published: DataTypes.DATE(6),
+    date_published: DataTypes.DATE,
     publisher: DataTypes.STRING,
+    processed_body: DataTypes.TEXT,
     section: DataTypes.STRING,
     source: DataTypes.STRING,
     thumbnail: DataTypes.STRING,
@@ -27,6 +28,11 @@ module.exports = (sequelize, DataTypes) => {
       },
     }
   });
+
+  Article.associate = (models) => {
+    // associations can be defined here
+    Article.belongsToMany(models.Tag, { through: 'Article_Tags', as: 'Tags' });
+  };
 
   return Article;
 };
